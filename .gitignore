@@ -1,0 +1,11 @@
+.idea/
+__pycache__/
+*.pyc
+.env
+venv/
+.venv/
+
+reminder.txt
+birthday_fail.txt
+.env.py
+*_rezerv*.py
