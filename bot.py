@@ -93,3 +93,8 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Критическая ошибка: {e}")
         sys.exit(1)
+        
+        secrution.py
+        time_rezerv_betta.py
+        text_time_menedger
+        reminder
