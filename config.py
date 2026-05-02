@@ -1,8 +1,13 @@
 import telebot
 from queue import Queue
 from datetime import datetime
+from dotenv import load_dotenv
+import os
 
-TOKEN = '8546334714:AAH5bYRtYBlTcFvfrYqUPwttWRFGh5DhID0'
+load_dotenv()
+
+TOKEN = os.getenv("BOT_TOKEN")
+
 bot = telebot.TeleBot(TOKEN)
 
 # Очереди для сообщений

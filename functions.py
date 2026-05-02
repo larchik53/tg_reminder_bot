@@ -355,3 +355,14 @@ def start_background_worker():
 	except Exception as e:
 		print(f"❌ Не удалось запустить worker: {e}")
 		return None
+def postpone_reminder(user_id, reminder_text, minutes=10):
+    """Создаёт новое напоминание через несколько минут."""
+    from datetime import datetime, timedelta
+    from config import REMINDER_FILE
+
+    new_time = (datetime.now() + timedelta(minutes=minutes)).strftime("%H:%M")
+
+    with open(REMINDER_FILE, "a", encoding="utf-8") as file:
+        file.write(f"{user_id} {new_time} {reminder_text}\n")
+
+    return new_time

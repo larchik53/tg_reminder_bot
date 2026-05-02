@@ -282,15 +282,19 @@ def not_done_handler(message):
 		
 		from config import last_reminder_for_user
 		
-		# Просто очищаем последнее напоминание
+		# обратока кнопки пока не сделано
 		if user_id in last_reminder_for_user:
 			reminder_text = last_reminder_for_user.pop(user_id, None)
-			print(f"⏳ Пользователь {user_id} отложил задачу: {reminder_text[:30]}")
+			
+			from functions import postpone_reminder
+			new_time = postpone_reminder(user_id, reminder_text, minutes=10)
+			
+			print(f"Пользователь {user_id} отложил задачу до {new_time}: {reminder_text[:30]}")
 		
 		bot.send_message(
 			message.chat.id,
-			"⏳ *Хорошо!*\n\nНапомню позже.",
-			parse_mode='Markdown'
+			f"Хорошо. Напомню позже в {new_time}.",
+			parse_mode="Markdown"
 		)
 		
 		# Возвращаем в главное меню

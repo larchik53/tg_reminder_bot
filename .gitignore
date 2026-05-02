@@ -7,5 +7,4 @@ venv/
 
 reminder.txt
 birthday_fail.txt
-.env.py
-*_rezerv*.py
+.env

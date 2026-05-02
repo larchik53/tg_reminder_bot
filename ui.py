@@ -137,3 +137,15 @@ def add_reminder():
 def successfull_reminder_fn(date, name):
 	"""Форматирует сообщение об успешном добавлении напоминания"""
 	return f"✅ *Сохранено!*\n\n⏰ Напоминание: {name}\n📅 Время: {date}\n\nНапоминание добавлено!"
+
+def format_reminder_list(reminders):
+    """Форматирует список напоминаний"""
+    if not reminders:
+        return "Список напоминаний пуст."
+
+    text = "Ваши напоминания:\n\n"
+
+    for i, reminder in enumerate(reminders, 1):
+        text += f"{i}. {reminder['time']} — {reminder['text']}\n"
+
+    return text

@@ -276,3 +276,28 @@ def nearest_birthday(user_id):
 	
 	except FileNotFoundError:
 		return None, None, None
+	
+def load_user_reminders(user_id):
+    """Загружает все напоминания пользователя"""
+    reminders = []
+
+    try:
+        with open(REMINDER_FILE, "r", encoding="utf-8") as file:
+            for line in file:
+                line = line.strip()
+
+                if not line:
+                    continue
+
+                parts = line.split(maxsplit=2)
+
+                if len(parts) == 3 and parts[0] == str(user_id):
+                    reminders.append({
+                        "time": parts[1],
+                        "text": parts[2]
+                    })
+
+    except FileNotFoundError:
+        pass
+
+    return reminders
