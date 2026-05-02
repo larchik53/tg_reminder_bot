@@ -149,3 +149,14 @@ def format_reminder_list(reminders):
         text += f"{i}. {reminder['time']} — {reminder['text']}\n"
 
     return text
+def format_reminder_list(reminders):
+    """Форматирует список напоминаний."""
+    if not reminders:
+        return "У тебя пока нет активных напоминаний."
+
+    text = "Твои активные напоминания:\n\n"
+
+    for i, reminder in enumerate(reminders, 1):
+        text += f"{i}. {reminder['time']} — {reminder['text']}\n"
+
+    return text

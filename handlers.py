@@ -57,7 +57,7 @@ def handle_all_messages(message):
 	
 	# ===== МЕНЮ ПЛАНОВ =====
 	elif text == "📝 Планы на день":
-		bot.send_message(message.chat.id, "📝 *Планы на день*\n\nВ разработке...", parse_mode='Markdown')
+		show_plans_list(message)
 	
 	elif text == "🛒 Обновить список покупок":
 		bot.send_message(message.chat.id, "🛒 *Список покупок*\n\nВ разработке...", parse_mode='Markdown')
@@ -312,3 +312,15 @@ def not_done_handler(message):
 			"⚠️ Произошла ошибка",
 			parse_mode='Markdown'
 		)
+
+
+def show_plans_list(message):
+	"""Показывает список активных напоминаний пользователя."""
+	from service import load_user_reminders
+	from ui import format_reminder_list
+	
+	user_id = message.from_user.id
+	reminders = load_user_reminders(user_id)
+	text = format_reminder_list(reminders)
+	
+	bot.send_message(message.chat.id, text, parse_mode='Markdown')

@@ -1,6 +1,7 @@
 # services.py - Логика обработки данных
 from config import BIRTHDAY_FILE, REMINDER_FILE
 from datetime import datetime, date
+from config import REMINDER_FILE
 
 
 def parse_birthday_input(text):
@@ -277,8 +278,28 @@ def nearest_birthday(user_id):
 	except FileNotFoundError:
 		return None, None, None
 	
+def remove_user_reminder(user_id, reminder_text):
+    """Удаляет выполненное напоминание из файла."""
+    from config import REMINDER_FILE
+
+    lines = []
+
+    try:
+        with open(REMINDER_FILE, "r", encoding="utf-8") as file:
+            for line in file:
+                if reminder_text not in line or str(user_id) not in line:
+                    lines.append(line)
+
+        with open(REMINDER_FILE, "w", encoding="utf-8") as file:
+            file.writelines(lines)
+
+    except Exception as e:
+        print(f"Ошибка удаления напоминания: {e}")
+
+
+
 def load_user_reminders(user_id):
-    """Загружает все напоминания пользователя"""
+    """Загружает все активные напоминания пользователя."""
     reminders = []
 
     try:
